@@ -25,10 +25,14 @@
 			@endauth
 		</ul>
 	</nav>
+
+	<hr>
+
 	<div class="container">
 		{{ $content }}
 	</div>
 
+	<hr>
 	<footer>
 		&copy; 2021 my balls
 	</footer>

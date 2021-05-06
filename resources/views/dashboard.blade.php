@@ -17,8 +17,8 @@
 		<form action="/rooms" method="POST">
 			@csrf
 			<div>
-				<label for="name">Name</label>
-				<input type="text" id="name" name="name">
+				<label for="title">Name</label>
+				<input type="text" id="title" name="title">
 			</div>
 
 			<div>

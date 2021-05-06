@@ -9,7 +9,7 @@ class Soundscape extends Model
 {
     use HasFactory;
 
-    $guarded = [];
+    protected $guarded = [];
 
     public function room() {
     	return $this->belongsTo(Room::class)

@@ -9,7 +9,7 @@ class Sound extends Model
 {
     use HasFactory;
 
-    $guarded = [];
+    protected $guarded = [];
 
     public function type() {
     	return $this->belongsTo(SoundType::class);

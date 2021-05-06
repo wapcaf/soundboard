@@ -5,13 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SoundType extends Model
+class RoomUser extends Model
 {
     use HasFactory;
-
-    protected $guarded = [];
-
-    public function sounds() {
-    	return $this->hasMany(Sound::class);
-    }
 }

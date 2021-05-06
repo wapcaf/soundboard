@@ -9,7 +9,7 @@ class SoundscapeSound extends Model
 {
     use HasFactory;
 
-    $guarded = [];
+    protected $guarded = [];
 
     public function sound() {
     	return $this->hasOne(Sound::class)
