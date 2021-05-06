@@ -3,6 +3,7 @@
 use App\Models\Room;
 use App\Models\User;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserFriendController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,6 +43,8 @@ Route::get('/rooms/{room}', function (Room $room) {
     	'user' => $user
 	]);
 });
+
+Route::post('/friends/add', [UserFriendController::class, 'add'])->name('friends.add');
 
 // Route::get('/rooms/{room}', function ($id) {
 // 	// Find a room based on it's id

@@ -8,17 +8,19 @@ use App\Models\Room;
 
 class RoomController extends Controller
 {
-    //
+    // https://beyondco.de/docs/laravel-websockets/basic-usage/starting
 
     public function index() {
 	    $user = Auth::user();
 		if (!Auth::check()) {
 	        return redirect()->route('login');
 	    }
-	    $rooms = $user->rooms; 
+	    $rooms = $user->rooms;
+        $userfriends = $user->userfriends;
 		return view('dashboard', [
 			'rooms' => $rooms,
-	    	'user' => $user
+	    	'user' => $user,
+            'userfriends' => $userfriends
 		]);
     }
 
