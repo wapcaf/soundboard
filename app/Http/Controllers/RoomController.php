@@ -15,12 +15,10 @@ class RoomController extends Controller
 		if (!Auth::check()) {
 	        return redirect()->route('login');
 	    }
-	    $rooms = $user->rooms;
-        $userfriends = $user->userfriends;
 		return view('dashboard', [
-			'rooms' => $rooms,
 	    	'user' => $user,
-            'userfriends' => $userfriends
+			'rooms' => $user->rooms,
+            'userfriends' => $user->userfriends
 		]);
     }
 
@@ -35,5 +33,14 @@ class RoomController extends Controller
     	);
     	$room->save();
     	return redirect()->route('dashboard.index');
+    }
+
+    public function remove(Request $request) {
+        $user = Auth::user();
+        $requestData = $request->input();
+        if ($room = $user->rooms->find($requestData['room'])) {
+            $room->delete();
+        }
+        return redirect()->route('dashboard.index');
     }
 }

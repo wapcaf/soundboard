@@ -11,7 +11,24 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-    .postCss('resources/css/app.css', 'public/css', [
+mix.webpackConfig({
+    "resolve": {
+        "alias": {
+            "react": "preact/compat",
+            "react-dom": "preact/compat"
+        }
+    }
+});
+
+
+mix.babelConfig({
+    "plugins": [
+        "@babel/plugin-proposal-class-properties"
+    ],
+});
+
+mix.js('resources/js/app.js', 'public/js').react();
+
+mix.postCss('resources/css/app.css', 'public/css', [
         //
-    ]);
+]);

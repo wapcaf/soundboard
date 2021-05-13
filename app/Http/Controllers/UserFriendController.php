@@ -17,6 +17,7 @@ class UserFriendController extends Controller
     		if ($friend->id === $user->id) {
     			return redirect()->route('dashboard.index');
     		}
+    		//ddd($friend->id);
     		$userFriend = new UserFriend([
     			'user_id' => $user->id,
     			'friend_id' => $friend->id,
@@ -28,6 +29,11 @@ class UserFriendController extends Controller
     }
 
     public function cancel(Request $request) {
-    	
+        $user = Auth::user();
+        $requestData = $request->input();
+        if ($friend = $user->friends->where('friend', $requestData['friend'])->first()) {
+            $user->userfriends->where('friend_id', $friend->id)->first()->delete();
+        }
+        return redirect()->route('dashboard.index');
     }
 }

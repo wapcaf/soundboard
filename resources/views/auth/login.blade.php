@@ -1,39 +1,41 @@
 <x-layout>
 	<x-slot name="content">
+		<div class="container">
 
-		<h2>Login</h2>
+			<h2>Login</h2>
 
-		@if ($errors->any())
-			<div>
-				<div>Something went wrong!</div>
+			@if ($errors->any())
+				<div>
+					<div>Something went wrong!</div>
 
-				<ul>
-					@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-					@endforeach
-				</ul>
-			</div>
-		@endif
+					<ul>
+						@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+						@endforeach
+					</ul>
+				</div>
+			@endif
 
-		<form action="/login" method="POST">
-			@csrf
+			<form action="/login" method="POST">
+				@csrf
 
 
-			<div>
-				<label for="email">Email</label>
-				<input type="email" id="email" name="email" value="{{ old('email') }}">
-			</div>
+				<div>
+					<label for="email">Email</label>
+					<input type="email" id="email" name="email" value="{{ old('email') }}">
+				</div>
 
-			<div>
-				<label for="password">Password</label>
-				<input type="password" id="password" name="password">
-			</div>
+				<div>
+					<label for="password">Password</label>
+					<input type="password" id="password" name="password">
+				</div>
 
-			<div>
-				<button type="submit">Login</button>
-			</div>
+				<div>
+					<button type="submit">Login</button>
+				</div>
 
-		</form>
-		
+			</form>
+		</div>
+
 	</x-slot>
 </x-layout>
