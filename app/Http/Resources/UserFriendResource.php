@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RoomResource extends JsonResource
+class UserFriendResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,13 +16,11 @@ class RoomResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
             'user' => $this->user,
-            'users' => $this->users,
+            'friend' => $this->friend,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];
-
-        //parent::toArray($request);
     }
 }

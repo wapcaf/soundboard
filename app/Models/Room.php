@@ -15,4 +15,8 @@ class Room extends Model
     	// hasOne, hasMany, belongsTo, belongsToMany
     	return $this->belongsTo(User::class);
     }
+
+    public function roomUsers() {
+    	return $this->hasMany(RoomUser::class);
+    }
 }

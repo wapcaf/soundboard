@@ -13,16 +13,6 @@ import _ from 'lodash';
 window.React = require('preact');
 
 class App extends Component {
-	state = {
-		message: 'Hey Abbie guess what'
-	}
-
-	onClick = (ev) => {
-		this.setState({
-			message: "it's time for skoo"
-		});
-	}
-
 	constructor() {
 		super({});
 	}
@@ -30,7 +20,7 @@ class App extends Component {
     render() {
         return (
 	      <BrowserRouter>
-	        <Route component={Main} />
+	        <Route component={Main} test="hello" />
 	      </BrowserRouter>
 	    );
     }

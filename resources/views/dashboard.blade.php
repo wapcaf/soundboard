@@ -2,7 +2,7 @@
 	<x-slot name="content">
 		<div class="container">
 			<div id="app"></div>
-
+{{-- 
 
 			<h1>Dashboard</h1>
 			<p>Welcome back {{ $user->username }}!</p>
@@ -83,7 +83,7 @@
 						</div>
 					</form>
 				</div>
-			</div>
+			</div> --}}
 
 		</div>
 

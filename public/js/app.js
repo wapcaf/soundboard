@@ -2012,8 +2012,6 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); // https://laravel.com/docs/8.x/mix
 // npm run watch
 // https://preactjs.com/guide/v10/components
@@ -2034,23 +2032,9 @@ var App = /*#__PURE__*/function (_Component) {
   var _super = _createSuper(App);
 
   function App() {
-    var _this;
-
     _classCallCheck(this, App);
 
-    _this = _super.call(this, {});
-
-    _defineProperty(_assertThisInitialized(_this), "state", {
-      message: 'Hey Abbie guess what'
-    });
-
-    _defineProperty(_assertThisInitialized(_this), "onClick", function (ev) {
-      _this.setState({
-        message: "it's time for skoo"
-      });
-    });
-
-    return _this;
+    return _super.call(this, {});
   }
 
   _createClass(App, [{
@@ -2058,7 +2042,8 @@ var App = /*#__PURE__*/function (_Component) {
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.BrowserRouter, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Route, {
-          component: _Router__WEBPACK_IMPORTED_MODULE_1__.default
+          component: _Router__WEBPACK_IMPORTED_MODULE_1__.default,
+          test: "hello"
         })
       });
     }
@@ -2103,19 +2088,43 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/views/Dashboard.js":
-/*!*****************************************!*\
-  !*** ./resources/js/views/Dashboard.js ***!
-  \*****************************************/
+/***/ "./resources/js/components/Friends/FriendItem.jsx":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Friends/FriendItem.jsx ***!
+  \********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ FriendItem)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+
+function FriendItem(properties) {
+  var userfriend = properties.userfriend;
+  var friend = userfriend.friend;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("p", {
+    children: [friend.username, " - ", userfriend.status]
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/Friends/Friends.js":
+/*!****************************************************!*\
+  !*** ./resources/js/components/Friends/Friends.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Friends)
 /* harmony export */ });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+/* harmony import */ var _FriendItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FriendItem */ "./resources/js/components/Friends/FriendItem.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2141,6 +2150,250 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+var Friends = /*#__PURE__*/function (_Component) {
+  _inherits(Friends, _Component);
+
+  var _super = _createSuper(Friends);
+
+  function Friends(props) {
+    var _this;
+
+    _classCallCheck(this, Friends);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      userfriends: [],
+      isFetching: false
+    };
+    return _this;
+  }
+
+  _createClass(Friends, [{
+    key: "fetchFriends",
+    value: function fetchFriends() {
+      var _this2 = this;
+
+      this.setState({
+        isFetching: true
+      });
+      axios.get('/api/friends', {}).then(function (response) {
+        _this2.setState({
+          userfriends: response.data,
+          isFetching: false
+        });
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.setState({
+          'isFetching': false
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchFriends();
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: this.state.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: "Loading friends..."
+        }) : _.isEmpty(this.state.userfriends) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: "You've got none, you loser."
+        }) : _.map(this.state.userfriends, function (userfriend) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_FriendItem__WEBPACK_IMPORTED_MODULE_1__.default, {
+            userfriend: userfriend
+          });
+        })
+      });
+    }
+  }]);
+
+  return Friends;
+}(preact__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Rooms/RoomItem.jsx":
+/*!****************************************************!*\
+  !*** ./resources/js/components/Rooms/RoomItem.jsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ RoomItem)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+
+function RoomItem(properties) {
+  var title = properties.title,
+      id = properties.id;
+  var url = '/rooms/' + id;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", {
+      href: url,
+      children: title
+    })
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/Rooms/Rooms.js":
+/*!************************************************!*\
+  !*** ./resources/js/components/Rooms/Rooms.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Rooms)
+/* harmony export */ });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _RoomItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RoomItem */ "./resources/js/components/Rooms/RoomItem.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+var Rooms = /*#__PURE__*/function (_Component) {
+  _inherits(Rooms, _Component);
+
+  var _super = _createSuper(Rooms);
+
+  function Rooms(props) {
+    var _this;
+
+    _classCallCheck(this, Rooms);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      rooms: [],
+      isFetching: false
+    };
+    return _this;
+  }
+
+  _createClass(Rooms, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.setState({
+        isFetching: true
+      });
+      axios.get('/api/rooms', {}).then(function (response) {
+        _this2.setState({
+          rooms: response.data,
+          isFetching: false
+        });
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.setState({
+          isFetching: false
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
+        children: this.state.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+          children: "Loading rooms..."
+        }) : _.map(this.state.rooms, function (room) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(_RoomItem__WEBPACK_IMPORTED_MODULE_1__.default, {
+            id: room.id,
+            title: room.title
+          });
+        })
+      });
+    }
+  }]);
+
+  return Rooms;
+}(preact__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/Dashboard.js":
+/*!*****************************************!*\
+  !*** ./resources/js/views/Dashboard.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ Dashboard)
+/* harmony export */ });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _components_Rooms_Rooms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../components/Rooms/Rooms */ "./resources/js/components/Rooms/Rooms.js");
+/* harmony import */ var _components_Friends_Friends__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../components/Friends/Friends */ "./resources/js/components/Friends/Friends.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+
 var Dashboard = /*#__PURE__*/function (_Component) {
   _inherits(Dashboard, _Component);
 
@@ -2151,20 +2404,59 @@ var Dashboard = /*#__PURE__*/function (_Component) {
 
     _classCallCheck(this, Dashboard);
 
-    _this = _super.call(this, {});
-    axios.get('/api/rooms', {}).then(function (response) {
-      console.log(response);
-    })["catch"](function (error) {
-      console.log(error.response);
-    });
+    _this = _super.call(this, props);
+    _this.state = {
+      user: {},
+      isFetching: false
+    };
     return _this;
   }
 
   _createClass(Dashboard, [{
+    key: "fetchUser",
+    value: function fetchUser() {
+      var _this2 = this;
+
+      this.setState({
+        'isFetching': true
+      });
+      axios.get('/api/user', {}).then(function (response) {
+        _this2.setState({
+          user: response.data,
+          isFetching: false
+        });
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.setState({
+          'isFetching': false
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchUser();
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {//clearInterval(this.poller);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-        children: "Dashboard app is open"
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+          children: "Dashboard"
+        }), this.state.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+          children: "Loading..."
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+          children: ["Welcome back ", this.state.user.username, "!"]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: "Rooms"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_Rooms_Rooms__WEBPACK_IMPORTED_MODULE_1__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h2", {
+          children: "Friends"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_Friends_Friends__WEBPACK_IMPORTED_MODULE_2__.default, {})]
       });
     }
   }]);
@@ -2172,7 +2464,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
   return Dashboard;
 }(preact__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Dashboard);
+
 
 /***/ }),
 
@@ -2185,7 +2477,7 @@ var Dashboard = /*#__PURE__*/function (_Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */   "default": () => (/* binding */ Room)
 /* harmony export */ });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
@@ -2225,15 +2517,47 @@ var Room = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Room);
 
     _this = _super.call(this, {});
-    console.log(props);
+    var roomId = parseInt(props.match.params.room, 10);
+    _this.state = {
+      room: {},
+      roomId: roomId,
+      isFetching: false
+    };
     return _this;
   }
 
   _createClass(Room, [{
+    key: "fetchRoom",
+    value: function fetchRoom() {
+      var _this2 = this;
+
+      var fetchUrl = '/api/rooms/' + this.state.roomId;
+      this.setState({
+        isFetching: true
+      });
+      axios.get(fetchUrl, {}).then(function (response) {
+        _this2.setState({
+          room: response.data,
+          isFetching: false
+        });
+      })["catch"](function (error) {
+        console.log(error);
+
+        _this2.setState({
+          isFetching: false
+        });
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.fetchRoom();
+    }
+  }, {
     key: "render",
     value: function render() {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h1", {
-        children: "Room app is open"
+        children: this.state.room ? this.state.room.title : 'Loading...'
       });
     }
   }]);
@@ -2241,7 +2565,7 @@ var Room = /*#__PURE__*/function (_Component) {
   return Room;
 }(preact__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Room);
+
 
 /***/ }),
 
