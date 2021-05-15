@@ -1,39 +1,152 @@
 @import url(https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap);
 :root {
-	--primary-color: #6500ff;
-	--secondary-color: #00B1FF;
-	--body-color: #333;
+  --primary-color: #6500ff;
+  --secondary-color: #00B1FF;
+  --body-color: #333;
+  --border-color: #959595;
+}
+
+.room-items {
+  min-height: 200px;
+  margin-bottom: 48px;
+}
+
+.room-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--body-color);
+  border-radius: 10px;
+}
+.room-item h3 {
+  margin: 0;
+  padding: 0;
+}
+.room-item__buttons {
+  top: 8px;
+  right: 8px;
+  position: absolute;
+  font-size: 24px;
+  color: var(--secondary-color);
+}
+.room-item__buttons a {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  background-color: white;
+  color: var(--secondary-color);
+}
+
+.friend-items {
+  height: 200px;
+  margin-bottom: 48px;
+}
+
+.friend-item {
+  font-size: 16px;
+  line-height: 24px;
+  height: 24px;
+}
+.friend-item__username {
+  margin-left: 12px;
+}
+.friend-item__status {
+  margin-left: 16px;
+}
+.friend-item i {
+  font-size: 24px;
+  vertical-align: bottom;
+}
+
+.input-text {
+  display: block;
+  cursor: text;
+  font-size: 16px;
+  border: 1px solid var(--border-color);
+  padding: 8px 16px 8px 16px;
+  height: 38px;
+  border-radius: 19px;
+  background-color: white;
+}
+.input-text i {
+  color: var(--border-color);
+  margin-right: 8px;
+}
+.input-text input {
+  border: 0;
+}
+.input-text input:focus {
+  outline: none;
+}
+.input-text--filled {
+  border: 1px solid var(--body-color);
+  color: var(--body-color);
+}
+.input-text--filled i {
+  color: var(--body-color);
+}
+.input-text--focus {
+  border: 1px solid var(--primary-color);
+}
+.input-text--focus i {
+  color: var(--primary-color);
 }
 
 body {
-	font-family: 'Lato', sans-serif;
-	background: white;
-	color: var(--body-color);
+  font-family: "Lato", sans-serif;
+  background: white;
+  color: var(--body-color);
+}
+
+h1 {
+  font-size: 34px;
+}
+
+h2 {
+  font-size: 26px;
+}
+h2 i {
+  margin-right: 12px;
+}
+
+h3 {
+  font-size: 20px;
 }
 
 button {
-	background-color: var(--secondary-color);
-	color: white;
-	border: 0;
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  color: white;
+  border: 0;
+  width: 100%;
+  height: 38px;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 38px;
+  text-align: center;
+}
+button i {
+  margin-right: 6px;
+  font-size: 14px;
+  vertical-align: 1px;
 }
 
 a {
-	color: var(--primary-color);
-}
-
-.navigation {
-
+  color: var(--primary-color);
 }
 
 .navigation__logo {
-	line-height: 48px;
-	text-decoration: none;
-	font-size: 24px;
-	font-weight: bold;
-	color: var(--primary-color);
+  line-height: 48px;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary-color);
 }
-
 .navigation__logo img {
-	height: 48px;
-	vertical-align: middle;
+  height: 48px;
+  vertical-align: middle;
 }

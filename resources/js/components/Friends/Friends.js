@@ -1,6 +1,7 @@
 
 import { h, render, Component } from 'preact';
 import FriendItem from './FriendItem';
+import AddFriend from './AddFriend';
 
 export default class Friends extends Component {
 	constructor(props) {
@@ -34,15 +35,19 @@ export default class Friends extends Component {
 	render() {
 		return (
 			<>
+				<section class="friend-items">
 				{
-					this.state.isFetching
-					? (<p>Loading friends...</p>)
-					: _.isEmpty(this.state.userfriends) 
-					? (<p>You've got none, you loser.</p>)
-					: _.map(this.state.userfriends, (userfriend) => (
+					this.state.isFetching ? 
+					(<p>Loading friends...</p>) : 
+					_.isEmpty(this.state.userfriends) ? 
+					(<p>You've got none, you loser. Add some below, quickly!</p>) : 
+					_.map(this.state.userfriends, (userfriend) => (
 						<FriendItem userfriend={userfriend}/>
 					))
 				}
+				</section>
+				<h3>Add a friend</h3>
+				<AddFriend/>
 			</>
 		);
 	}

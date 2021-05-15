@@ -4,6 +4,14 @@ export default function RoomItem(properties) {
 	const url = '/rooms/' + id;
 
 	return (
-		<p><a href={url}>{title}</a></p>
+		<article class="room-item">
+			<h3>{title}</h3>
+
+			<div class="room-item__buttons">
+				<a href={url}>
+					<i class="fas fa-sign-in-alt"></i>
+				</a>
+			</div>
+		</article>
 	);
 }

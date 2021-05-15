@@ -46,11 +46,17 @@ export default class Dashboard extends Component {
 				 	: (<p>Welcome back {this.state.user.username}!</p>)
 				}
 
-				<h2>Rooms</h2>
-				<Rooms/>
-
-				<h2>Friends</h2>
-				<Friends/>
+				<div class="row">
+					<div class="col-md-5">
+						<h2><i class="fas fa-users"></i>Rooms</h2>
+						<Rooms/>
+					</div>
+					<div class="col-md-1"></div>
+					<div class="col-md-5">
+						<h2><i class="fas fa-user-friends"></i>Friends</h2>
+						<Friends/>
+					</div>
+				</div>
 			</>
 		);
 	}

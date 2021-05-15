@@ -1,0 +1,42 @@
+.input {
+	&-text {
+		display: block;
+		cursor: text;
+		font-size: 16px;
+		border: 1px solid var(--border-color);
+	    padding: 8px 16px 8px 16px;
+	    height: 38px;
+	    border-radius: 19px;
+	    background-color: white;
+
+		i {
+			color: var(--border-color);
+			margin-right: 8px;
+		}
+
+		input {
+			border: 0;
+
+			&:focus{
+			    outline: none;
+			}
+		}
+
+		&--filled {
+			border: 1px solid var(--body-color);
+			color: var(--body-color);
+
+			i {
+				color: var(--body-color);
+			}
+		}
+
+		&--focus {
+			border: 1px solid var(--primary-color);
+
+			i {
+				color: var(--primary-color);
+			}
+		}
+	}
+}

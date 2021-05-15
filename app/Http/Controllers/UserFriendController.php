@@ -4,12 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Auth;
+
+use App\Http\Resources\UserFriendResource;
+
 use App\Models\User;
 use App\Models\UserFriend;
 
 class UserFriendController extends Controller
 {
-    //
+    public function index(Request $request) {
+        $user = $request->user();
+        return response()->json(UserFriendResource::collection($user->userfriends));
+    }
+
+    public function add(Request $request) {
+        $user = $request->user();
+    }    
+
+    /*
     public function add(Request $request) {
     	$user = Auth::user();
     	$requestData = $request->input();
@@ -36,4 +48,5 @@ class UserFriendController extends Controller
         }
         return redirect()->route('dashboard.index');
     }
+    */
 }

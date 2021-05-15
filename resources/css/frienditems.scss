@@ -1,0 +1,23 @@
+.friend-items {
+	height: 200px;
+	margin-bottom: 48px;
+}
+
+.friend-item {
+	font-size: 16px;
+	line-height: 24px;
+	height: 24px;
+
+	&__username {
+		margin-left: 12px;
+	}
+
+	&__status {
+		margin-left: 16px;
+	}
+
+	i {
+		font-size: 24px;
+    	vertical-align: bottom;
+	}
+}

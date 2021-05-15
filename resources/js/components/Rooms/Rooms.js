@@ -1,6 +1,7 @@
 
 import { h, render, Component } from 'preact';
 import RoomItem from './RoomItem';
+import AddRoom from './AddRoom';
 
 export default class Rooms extends Component {
 	constructor(props) {
@@ -30,6 +31,7 @@ export default class Rooms extends Component {
 	render() {
 		return (
 			<>
+				<section class="room-items">
 				{
 					this.state.isFetching
 					? (<p>Loading rooms...</p>)
@@ -37,6 +39,9 @@ export default class Rooms extends Component {
 						<RoomItem id={room.id} title={room.title}/>
 					))
 				}
+				</section>
+				<h3>Create a new room</h3>
+				<AddRoom />
 			</>
 		);
 	}

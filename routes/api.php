@@ -2,10 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Resources\RoomResource;
+
 use App\Models\Room;
-use App\Http\Resources\UserFriendResource;
-use App\Models\UserFriend;
+
+use App\Http\Controllers\RoomController;
+use App\Http\Controllers\UserFriendController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,16 +33,8 @@ Route::middleware('auth')->get('/poll/{room}', function(Room $room) {
 	return ['message' => 'room id = ' . $room->id];
 });
 
-Route::middleware('auth')->get('/rooms', function(Request $request) {
-	$user = $request->user();
-	return response()->json(RoomResource::collection($user->rooms));
-});
+Route::middleware('auth')->get('/rooms', [RoomController::class, 'index'])->name('rooms.index');
+Route::middleware('auth')->get('/rooms/{room}', [RoomController::class, 'room'])->name('rooms.room');
 
-Route::middleware('auth')->get('/rooms/{room}', function(Request $request, $room) {
-	return response()->json(new RoomResource(Room::findOrFail($room)));
-});
-
-Route::middleware('auth')->get('/friends', function(Request $request) {
-	$user = $request->user();
-	return response()->json(UserFriendResource::collection($user->userfriends));
-});
+Route::middleware('auth')->get('/friends', [UserFriendController::class, 'index'])->name('userfriends.index');
+Route::middleware('auth')->post('/friends', [UserFriendController::class, 'add'])->name('userfriends.add');
