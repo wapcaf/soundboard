@@ -85,6 +85,15 @@ export default class Dashboard extends Component {
 		});
 	}
 
+	onRemoveRoom = (room) => {
+		this.setState({
+			rooms: {
+				data: _.without(this.state.rooms.data, room),
+				isFetching: false
+			}
+		});
+	}
+
 	componentDidMount() {
 		this.fetchAll();
 	}
@@ -93,22 +102,39 @@ export default class Dashboard extends Component {
 		//clearInterval(this.poller);
 	}
 
+	getFriends() {
+		return _.filter(this.state.userfriends.data, {status: 'accepted'});
+	}
+
 	render() {
+		console.log(this.getFriends());
 		return (
 			<>
-				<h1>Dashboard</h1>
-				{
-					this.state.user.isFetching
-					? (<p>Loading...</p>)
-				 	: (<p>Welcome back {this.state.user.data.username}!</p>)
-				}
+				<div class="row">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-10">
+						<h1>Dashboard</h1>
+						{
+							this.state.user.isFetching
+							? (<p>Loading...</p>)
+						 	: (<p>Welcome back {this.state.user.data.username}!</p>)
+						}
+					</div>
+				</div>
 
 				<div class="row">
-					<div class="col-lg-6">
-						<h2><i class="fas fa-users"></i>Rooms</h2>
-						<Rooms rooms={this.state.rooms} onAddRoom={this.onAddRoom}/>
+					<div class="col-lg-1"></div>
+					<div class="col-lg-5">
+						<h2><i class="fas fa-door-closed"></i>Rooms</h2>
+						<Rooms
+							friends={this.getFriends()}
+							rooms={this.state.rooms} 
+							onAddRoom={this.onAddRoom}
+							onRemoveRoom={this.onRemoveRoom}
+						/>
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-1"></div>
+					<div class="col-lg-5">
 						<h2><i class="fas fa-user-friends"></i>Friends</h2>
 						<Friends 
 							userfriends={this.state.userfriends} 

@@ -10,6 +10,7 @@
 }
 
 .room-item {
+	animation: fadeIn 0.5s;
 	position: relative;
 	display: block;
 	width: 100%;
@@ -18,27 +19,49 @@
 	border-radius: 10px;
 	margin-bottom: 16px;
 
+	header {
+		margin-bottom: 12px;
+	}
+
+	hr {
+		border-top: 1px solid var(--faded-grey-color);
+		margin-bottom: 12px;
+	}
+
 	h3 {
+		display: inline-block;
 		margin: 0;
 		padding: 0;
+		cursor: pointer;
+		min-width: 50%;
+
+		a {
+			text-decoration: none;
+			color: var(--body-color);
+		}
+
+		i {
+			margin-right: 12px;
+		}
 	}
 
 	&__buttons {
-		top: 8px;
-		right: 8px;
+		top: 10px;
+		right: 10px;
 		position: absolute;
 		font-size: 24px;
 		color: var(--secondary-color);
 
 		.confirmation-buttons {
 			float: right;
+			margin-right: 8px;
 		}
 
 		a {
 			float: right;
 			width: 36px;
 			height: 36px;
-			line-height: 36px;
+			line-height: 32px;
 			text-align: center;
 			background-color: white;
 			color: var(--secondary-color);

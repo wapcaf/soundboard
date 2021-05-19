@@ -1,6 +1,15 @@
 
 import { h, render, Component } from 'preact';
 
+// progress circle
+// https://css-tricks.com/building-progress-ring-quickly/
+
+// Audio api
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API
+
+// or use howler?
+// https://howlerjs.com/
+
 export default class Room extends Component {
 	constructor(props) {
 		super({});

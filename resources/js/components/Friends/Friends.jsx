@@ -8,6 +8,8 @@ export default function Friends(properties) {
 
 	return (
 		<>
+			<h3>Add a friend</h3>
+			<AddFriend onAddFriend={onAddFriend}/>
 			<section class="friend-items">
 			{
 				userfriends.isFetching ? 
@@ -19,8 +21,6 @@ export default function Friends(properties) {
 				))
 			}
 			</section>
-			<h3>Add a friend</h3>
-			<AddFriend onAddFriend={onAddFriend}/>
 		</>
 	);
 }

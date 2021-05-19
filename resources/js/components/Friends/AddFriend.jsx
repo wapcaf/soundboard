@@ -2,11 +2,11 @@ import TextInput from '../UI/TextInput';
 import Button from '../UI/Button';
 import { useState } from 'preact/hooks';
 
-export default function AddFriend(properties) {
+export default function AddFriend(props) {
 	let button = React.createRef();
 	let input = React.createRef();
 
-	const {onAddFriend} = properties;
+	const {onAddFriend} = props;
   	const [username, setUsername] = useState('');
 
 	const clickSubmit = (e) => {

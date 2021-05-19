@@ -24,7 +24,7 @@ export default class ConfirmationButton extends Component {
 	}
 
 	componentWillUnmount() {
-		document.addEventListener('mousedown', this.handleClickOutside);
+		document.removeEventListener('mousedown', this.handleClickOutside);
 	}
 
 	handleClickOutside = (event) => {

@@ -16,6 +16,8 @@
 
 		input {
 			border: 0;
+			width: 100%;
+			max-width: calc(100% - 28px);
 
 			&:focus{
 			    outline: none;
@@ -37,6 +39,11 @@
 			i {
 				color: var(--primary-color);
 			}
+		}
+
+		&--autocompleting {
+			border-bottom-left-radius: 0;
+			border-bottom-right-radius: 0;
 		}
 	}
 }

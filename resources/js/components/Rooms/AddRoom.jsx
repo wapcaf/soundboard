@@ -25,14 +25,14 @@ export default function AddRoom(properties) {
 			<div class="row">
 				<div class="col-lg-8">
 					<TextInput 
-						icon="fas fa-plus-square" 
+						icon="fas fa-door-open" 
 						onChange={setRoomname} 
 						ref={input} 
 						value={roomname}
 						placeholder="Room name"/>
 				</div>
 				<div class="col-lg-4">
-					<Button icon="fas fa-plus-square" onClick={clickSubmit} ref={button} text="Create"/>
+					<Button icon="fas fa-plus" onClick={clickSubmit} ref={button} text="Create"/>
 				</div>
 			</div>
 		</section>

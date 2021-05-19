@@ -36,8 +36,9 @@ class RoomController extends Controller
     public function remove(Request $request, $room) {
         $user = $request->user();
         if ($room = $user->rooms->find($room)) {
-            $room->delete();
+            $destroy = Room::destroy($room->id);
         }
+        return $destroy;
     }
 
 

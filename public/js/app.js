@@ -2119,10 +2119,10 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-function AddFriend(properties) {
+function AddFriend(props) {
   var button = React.createRef();
   var input = React.createRef();
-  var onAddFriend = properties.onAddFriend;
+  var onAddFriend = props.onAddFriend;
 
   var _useState = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_2__.useState)(''),
       _useState2 = _slicedToArray(_useState, 2),
@@ -2255,7 +2255,11 @@ function Friends(properties) {
       onAddFriend = properties.onAddFriend,
       onRemoveFriend = properties.onRemoveFriend;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+      children: "Add a friend"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddFriend__WEBPACK_IMPORTED_MODULE_2__.default, {
+      onAddFriend: onAddFriend
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
       "class": "friend-items",
       children: userfriends.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
         children: "Loading friends..."
@@ -2267,10 +2271,6 @@ function Friends(properties) {
           onRemoveFriend: onRemoveFriend
         });
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-      children: "Add a friend"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddFriend__WEBPACK_IMPORTED_MODULE_2__.default, {
-      onAddFriend: onAddFriend
     })]
   });
 }
@@ -2337,7 +2337,7 @@ function AddRoom(properties) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         "class": "col-lg-8",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_UI_TextInput__WEBPACK_IMPORTED_MODULE_0__.default, {
-          icon: "fas fa-plus-square",
+          icon: "fas fa-door-open",
           onChange: setRoomname,
           ref: input,
           value: roomname,
@@ -2346,7 +2346,7 @@ function AddRoom(properties) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         "class": "col-lg-4",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_UI_Button__WEBPACK_IMPORTED_MODULE_1__.default, {
-          icon: "fas fa-plus-square",
+          icon: "fas fa-plus",
           onClick: clickSubmit,
           ref: button,
           text: "Create"
@@ -2369,35 +2369,101 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ RoomItem)
 /* harmony export */ });
-/* harmony import */ var _UI_ConfirmationButton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../UI/ConfirmationButton */ "./resources/js/components/UI/ConfirmationButton.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+/* harmony import */ var preact_hooks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact/hooks */ "./node_modules/preact/hooks/dist/hooks.module.js");
+/* harmony import */ var _UI_ConfirmationButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../UI/ConfirmationButton */ "./resources/js/components/UI/ConfirmationButton.jsx");
+/* harmony import */ var _UI_TextInput__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../UI/TextInput */ "./resources/js/components/UI/TextInput.jsx");
+/* harmony import */ var _UI_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../UI/Button */ "./resources/js/components/UI/Button.jsx");
+/* harmony import */ var _UI_AutoComplete__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../UI/AutoComplete */ "./resources/js/components/UI/AutoComplete.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr && (typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]); if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
 
 
 
 function RoomItem(properties) {
-  var room = properties.room;
+  var room = properties.room,
+      onRemoveRoom = properties.onRemoveRoom,
+      friends = properties.friends;
   var url = '/rooms/' + room.id;
 
+  var _useState = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_0__.useState)(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      username = _useState2[0],
+      setUsername = _useState2[1];
+
+  var _useState3 = (0,preact_hooks__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      autoCompleting = _useState4[0],
+      setAutoCompleting = _useState4[1];
+
   var removeRoom = function removeRoom() {
-    console.log(room);
+    axios["delete"]("/api/rooms/".concat(room.id), {}).then(function (response) {
+      onRemoveRoom(room);
+      console.log(response);
+    })["catch"](function (error) {
+      console.log(error);
+    });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("article", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("article", {
     "class": "room-item",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h3", {
-      children: room.title
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
-      "class": "room-item__buttons",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
-        href: url,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("i", {
-          "class": "fas fa-sign-in-alt"
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("header", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
+          href: url,
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            "class": "fas fa-door-open"
+          }), room.title]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_UI_ConfirmationButton__WEBPACK_IMPORTED_MODULE_0__.default, {
-        icon: "fas fa-trash",
-        onConfirm: removeRoom
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        "class": "room-item__buttons",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("a", {
+          href: url,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+            "class": "fas fa-sign-in-alt"
+          })
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UI_ConfirmationButton__WEBPACK_IMPORTED_MODULE_1__.default, {
+          icon: "fas fa-trash",
+          onConfirm: removeRoom
+        })]
       })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("hr", {}), "INVITE STUFF HERE"]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+      "class": "row",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+        "class": "col-md-6",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UI_TextInput__WEBPACK_IMPORTED_MODULE_2__.default, {
+          icon: "fas fa-user-plus",
+          placeholder: "Invite by username",
+          onChange: setUsername,
+          value: username
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UI_AutoComplete__WEBPACK_IMPORTED_MODULE_4__.default, {
+          autoCompleting: autoCompleting,
+          search: username,
+          searchBy: "username",
+          from: friends
+        })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+        "class": "col-md-6",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UI_Button__WEBPACK_IMPORTED_MODULE_3__.default, {
+          text: "Invite Link",
+          icon: "fas fa-link"
+        })
+      })]
+    })]
   });
 }
 
@@ -2426,22 +2492,63 @@ __webpack_require__.r(__webpack_exports__);
 
 function Rooms(properties) {
   var rooms = properties.rooms,
-      onAddRoom = properties.onAddRoom;
+      onAddRoom = properties.onAddRoom,
+      onRemoveRoom = properties.onRemoveRoom,
+      friends = properties.friends;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
+      children: "Create a new room"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddRoom__WEBPACK_IMPORTED_MODULE_2__.default, {
+      onAddRoom: onAddRoom
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
       "class": "room-items",
       children: rooms.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
         children: "Loading rooms..."
       }) : _.map(rooms.data, function (room) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_RoomItem__WEBPACK_IMPORTED_MODULE_1__.default, {
-          room: room
+          room: room,
+          friends: friends,
+          onRemoveRoom: onRemoveRoom
         });
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-      children: "Create a new room"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddRoom__WEBPACK_IMPORTED_MODULE_2__.default, {
-      onAddRoom: onAddRoom
     })]
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/js/components/UI/AutoComplete.jsx":
+/*!*****************************************************!*\
+  !*** ./resources/js/components/UI/AutoComplete.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ AutoComplete)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
+
+function AutoComplete(props) {
+  var autoCompleting = props.autoCompleting,
+      search = props.search,
+      searchBy = props.searchBy,
+      from = props.from;
+
+  var results = _.filter(from, function (item) {
+    return _.includes(item.friend.username, search);
+  });
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+    "class": "auto-complete",
+    children: search.length > 0 ? results.length > 0 ? _.map(results, function (result) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+        children: result.friend.username
+      });
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+      children: "No matching friends"
+    }) : null
   });
 }
 
@@ -2635,7 +2742,7 @@ var ConfirmationButton = /*#__PURE__*/function (_Component) {
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
-      document.addEventListener('mousedown', this.handleClickOutside);
+      document.removeEventListener('mousedown', this.handleClickOutside);
     }
   }, {
     key: "render",
@@ -2816,18 +2923,12 @@ var TextInput = /*#__PURE__*/function (_Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleChange", function () {
       var text = _this.textInput.current.value;
-
-      _this.props.onChange(text);
-
-      _this.setState({
-        value: text
-      });
+      _this.props.onChange ? _this.props.onChange(text) : null;
     });
 
     _this.state = {
       icon: props.icon || '',
       placeholder: props.placeholder || '',
-      value: props.value || '',
       focus: false
     };
     _this.textInput = React.createRef();
@@ -2838,7 +2939,7 @@ var TextInput = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var inputClass = 'input input-text';
-      this.state.value.length > 0 ? inputClass += ' input-text--filled' : null;
+      if (this.props.value) this.props.value.length > 0 ? inputClass += ' input-text--filled' : null;
       this.state.focus ? inputClass += ' input-text--focus' : null;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
         "class": inputClass,
@@ -2851,7 +2952,7 @@ var TextInput = /*#__PURE__*/function (_Component) {
           onChange: this.handleChange,
           onFocus: this.onFocus,
           onBlur: this.onBlur,
-          value: this.props.value,
+          value: this.props.value || '',
           type: "text"
         })]
       });
@@ -2962,6 +3063,15 @@ var Dashboard = /*#__PURE__*/function (_Component) {
       });
     });
 
+    _defineProperty(_assertThisInitialized(_this), "onRemoveRoom", function (room) {
+      _this.setState({
+        rooms: {
+          data: _.without(_this.state.rooms.data, room),
+          isFetching: false
+        }
+      });
+    });
+
     _this.state = {
       user: {
         data: {},
@@ -3031,29 +3141,51 @@ var Dashboard = /*#__PURE__*/function (_Component) {
     value: function componentWillUnmount() {//clearInterval(this.poller);
     }
   }, {
+    key: "getFriends",
+    value: function getFriends() {
+      return _.filter(this.state.userfriends.data, {
+        status: 'accepted'
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      console.log(this.getFriends());
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
-          children: "Dashboard"
-        }), this.state.user.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-          children: "Loading..."
-        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
-          children: ["Welcome back ", this.state.user.data.username, "!"]
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+          "class": "row",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            "class": "col-lg-1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            "class": "col-lg-10",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
+              children: "Dashboard"
+            }), this.state.user.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+              children: "Loading..."
+            }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("p", {
+              children: ["Welcome back ", this.state.user.data.username, "!"]
+            })]
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           "class": "row",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            "class": "col-lg-6",
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            "class": "col-lg-1"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
+            "class": "col-lg-5",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h2", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
-                "class": "fas fa-users"
+                "class": "fas fa-door-closed"
               }), "Rooms"]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_components_Rooms_Rooms__WEBPACK_IMPORTED_MODULE_1__.default, {
+              friends: this.getFriends(),
               rooms: this.state.rooms,
-              onAddRoom: this.onAddRoom
+              onAddRoom: this.onAddRoom,
+              onRemoveRoom: this.onRemoveRoom
             })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            "class": "col-lg-1"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
-            "class": "col-lg-6",
+            "class": "col-lg-5",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h2", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("i", {
                 "class": "fas fa-user-friends"
@@ -3111,6 +3243,12 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
+ // progress circle
+// https://css-tricks.com/building-progress-ring-quickly/
+// Audio api
+// https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Using_Web_Audio_API
+// or use howler?
+// https://howlerjs.com/
 
 
 
