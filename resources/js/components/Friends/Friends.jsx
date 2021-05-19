@@ -10,6 +10,7 @@ export default function Friends(properties) {
 		<>
 			<h3>Add a friend</h3>
 			<AddFriend onAddFriend={onAddFriend}/>
+			<hr/><br/>
 			<section class="friend-items">
 			{
 				userfriends.isFetching ? 

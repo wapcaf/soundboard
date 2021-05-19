@@ -10,6 +10,7 @@ export default function Rooms(properties) {
 		<>
 			<h3>Create a new room</h3>
 			<AddRoom onAddRoom={onAddRoom}/>
+			<hr/><br/>
 			<section class="room-items">
 			{
 				rooms.isFetching
