@@ -4,61 +4,57 @@
   --secondary-color: #00B1FF;
   --body-color: #333;
   --border-color: #959595;
+  --confirm-color: #00e626;
+  --reject-color: #e60000;
 }
 
-.room-items {
-  min-height: 200px;
-  margin-bottom: 48px;
-}
-
-.room-item {
-  position: relative;
-  display: block;
+button {
+  cursor: pointer;
+  background-color: var(--secondary-color);
+  color: white;
+  border: 0;
   width: 100%;
-  padding: 16px;
-  border: 1px solid var(--body-color);
-  border-radius: 10px;
-}
-.room-item h3 {
-  margin: 0;
-  padding: 0;
-}
-.room-item__buttons {
-  top: 8px;
-  right: 8px;
-  position: absolute;
-  font-size: 24px;
-  color: var(--secondary-color);
-}
-.room-item__buttons a {
-  display: inline-block;
-  width: 36px;
-  height: 36px;
-  line-height: 36px;
+  height: 38px;
+  border-radius: 19px;
+  font-weight: bold;
+  font-size: 16px;
+  line-height: 38px;
   text-align: center;
+}
+button i {
+  margin-right: 6px;
+  font-size: 14px;
+  vertical-align: 1px;
+}
+
+.confirmation-buttons {
+  text-align: right;
+  background-color: white;
+}
+.confirmation-buttons .button + .button {
+  margin-left: 8px;
+}
+
+.button--icon {
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  border-radius: 0;
   background-color: white;
   color: var(--secondary-color);
 }
-
-.friend-items {
-  height: 200px;
-  margin-bottom: 48px;
-}
-
-.friend-item {
-  font-size: 16px;
-  line-height: 24px;
-  height: 24px;
-}
-.friend-item__username {
-  margin-left: 12px;
-}
-.friend-item__status {
-  margin-left: 16px;
-}
-.friend-item i {
+.button--icon i {
   font-size: 24px;
-  vertical-align: bottom;
+  line-height: 32px;
+  margin: 0;
+  padding: 0;
+}
+.button--confirm {
+  color: var(--confirm-color);
+}
+.button--reject {
+  color: var(--reject-color);
 }
 
 .input-text {
@@ -95,6 +91,83 @@
   color: var(--primary-color);
 }
 
+.room-items {
+  margin-bottom: 32px;
+}
+@media screen and (min-width: 768px) {
+  .room-items {
+    min-height: 200px;
+  }
+}
+.room-items-add {
+  margin-bottom: 32px;
+}
+
+.room-item {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border: 1px solid var(--body-color);
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+.room-item h3 {
+  margin: 0;
+  padding: 0;
+}
+.room-item__buttons {
+  top: 8px;
+  right: 8px;
+  position: absolute;
+  font-size: 24px;
+  color: var(--secondary-color);
+}
+.room-item__buttons .confirmation-buttons {
+  float: right;
+}
+.room-item__buttons a {
+  float: right;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  text-align: center;
+  background-color: white;
+  color: var(--secondary-color);
+}
+
+.friend-items {
+  margin-bottom: 32px;
+}
+@media screen and (min-width: 768px) {
+  .friend-items {
+    min-height: 200px;
+  }
+}
+.friend-items-add {
+  margin-bottom: 32px;
+}
+
+.friend-item {
+  font-size: 16px;
+  line-height: 24px;
+  height: 24px;
+  margin-bottom: 16px;
+}
+.friend-item__username {
+  margin-left: 12px;
+}
+.friend-item__status {
+  margin-left: 16px;
+}
+.friend-item__buttons {
+  float: right;
+}
+.friend-item > i {
+  font-size: 24px;
+  vertical-align: bottom;
+}
+
 body {
   font-family: "Lato", sans-serif;
   background: white;
@@ -114,25 +187,6 @@ h2 i {
 
 h3 {
   font-size: 20px;
-}
-
-button {
-  cursor: pointer;
-  background-color: var(--secondary-color);
-  color: white;
-  border: 0;
-  width: 100%;
-  height: 38px;
-  border-radius: 6px;
-  font-weight: bold;
-  font-size: 16px;
-  line-height: 38px;
-  text-align: center;
-}
-button i {
-  margin-right: 6px;
-  font-size: 14px;
-  vertical-align: 1px;
 }
 
 a {

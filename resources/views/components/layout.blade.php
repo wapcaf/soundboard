@@ -49,6 +49,9 @@
 			&copy; 2021 my balls
 		</div>
 	</footer>
+	<div id="modal">
+
+	</div>
 </body>
 </html>
 <!-- https://laracasts.com/series/laravel-8-from-scratch/episodes/9?autoplay=true -->

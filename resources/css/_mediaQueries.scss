@@ -1,0 +1,46 @@
+// Media Queries
+$width-min: 320px;
+$height-min: 269.98px;
+
+// @media screen and (max-width: $width-ps-max) and (max-height: $height-ps-max) {}
+$width-xs: 480px;
+$height-xs: 270px;
+$width-xs-max: 767.98px;
+$height-xs-max: 431.98px;
+
+// @media screen and (min-width: $width-ps) and (min-height: $height-ps) {}
+// @media screen and (max-width: $width-ps-max) and (max-height: $height-ps-max) {}
+$width-ps: 576px;
+$width-ps-max: 767.98px;
+$height-ps: 340px;
+$height-ps-max: 431.98px;
+
+// @media screen and (min-width: $width-sm) and (min-height: $height-sm) {}
+// @media screen and (max-width: $width-sm-max) and (max-height: $height-sm-max) {}
+$width-sm: 768px;
+$width-sm-max: 991.98px;
+$height-sm: 432px;
+$height-sm-max: 557.98px;
+
+// @media screen and (min-width: $width-md) and (min-height: $height-md) {}
+// @media screen and (max-width: $width-md-max) and (max-height: $height-md-max) {}
+$width-md: 992px;
+$width-md-max: 1199.98px;
+$height-md: 558px;
+$height-md-max: 674.98px;
+
+// @media screen and (min-width: $width-lg) and (min-height: $height-lg) {}
+// @media screen and (max-width: $width-lg-max) and (max-height: $height-lg-max) {}
+$width-lg: 1200px;
+$width-lg-max: 1499.98px;
+$height-lg: 675px;
+$height-lg-max: 843.98px;
+
+// @media screen and (min-width: $width-xl) and (min-height: $height-xl) {}
+$width-xl: 1500px;
+$height-xl: 844px;
+
+$container-sm: 720px;
+$container-md: 940px;
+$container-lg: 1140px;
+$container-xl: 1410px;

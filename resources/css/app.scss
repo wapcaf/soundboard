@@ -1,15 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
 
-:root {
-	--primary-color: #6500ff;
-	--secondary-color: #00B1FF;
-	--body-color: #333;
-	--border-color: #959595;
-}
+@import './_mediaQueries.scss';
+@import './_colors.scss';
+
+@import './buttons.scss';
+@import './textinput.scss';
 
 @import './roomitems.scss';
 @import './frienditems.scss';
-@import './textinput.scss';
 
 body {
 	font-family: 'Lato', sans-serif;
@@ -31,25 +29,6 @@ h2 {
 
 h3 {
 	font-size: 20px;
-}
-
-button {
-	cursor: pointer;
-	background-color: var(--secondary-color);
-	color: white;
-	border: 0;
-	width: 100%;
-	height: 38px;
-	border-radius: 6px;
-	font-weight: bold;
-	font-size: 16px;
-	line-height: 38px;
-	text-align: center;
-	i {
-		margin-right: 6px;
-		font-size: 14px;
-    	vertical-align: 1px;
-	}
 }
 
 a {

@@ -17,9 +17,51 @@ class UserFriendController extends Controller
         return response()->json(UserFriendResource::collection($user->userfriends));
     }
 
-    public function add(Request $request) {
+    // TODO: write add friend code
+    public function create(Request $request) {
         $user = $request->user();
-    }    
+        $requestData = $request->json()->all();
+
+        $friend = User::where('username', $requestData['username'])->get();
+
+        if ($friend->isEmpty()) {
+            return response()->json([
+                'message' => 'This user does not exist'
+            ], 404);
+        }
+
+        // check if the friend request already exists
+        $matchThese = [
+            'user_id' => $user->id,
+            'friend_id' => $friend->first()->id
+        ];
+
+        $found = UserFriend::Where($matchThese)->get();
+
+        if ($found->isEmpty()) {
+            $userfriend = new UserFriend([
+                'user_id' => $user->id,
+                'friend_id' => $friend->first()->id,
+                'status' => 'pending'
+            ]);
+            $userfriend->save();
+            return response()->json(new UserFriendResource($userfriend));
+        } else {
+            return response()->json([
+                'message' => 'Friend request already sent'
+            ], 409);
+        }
+
+    }
+
+    // TODO: write remove friend / cancel friend request
+    public function remove(Request $request, $userfriendID) {
+        $userfriend = UserFriend::find($userfriendID);
+        if ($userfriend) {
+            $destroy = UserFriend::destroy($userfriendID);
+        }
+        return response()->json($destroy);
+    } 
 
     /*
     public function add(Request $request) {

@@ -20,7 +20,7 @@ class App extends Component {
     render() {
         return (
 	      <BrowserRouter>
-	        <Route component={Main} test="hello" />
+	        <Route component={Main} />
 	      </BrowserRouter>
 	    );
     }

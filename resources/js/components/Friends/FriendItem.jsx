@@ -1,10 +1,19 @@
+import ConfirmationButton from '../UI/ConfirmationButton';
 
-export default function FriendItem(properties) {
-	const {userfriend} = properties;
+export default function FriendItem(props) {
+	const {userfriend, onRemoveFriend} = props;
 	const {friend} = userfriend;
 	const online = true;
 
-	console.log(userfriend.status);
+	const removeFriend = () => {
+		axios.delete(`/api/friends/${userfriend.id}`, {
+		}).then((response) => {
+			onRemoveFriend(userfriend);
+			console.log(response);
+		}).catch((error) => {
+			console.log(error);
+		});
+	}
 
 	return (
 		<article class="friend-item">
@@ -19,9 +28,11 @@ export default function FriendItem(properties) {
 			{
 				userfriend.status == 'pending' ?
 				(
-					<span class="friend-item__status">
-						({userfriend.status})
-					</span>
+					<>
+						<span class="friend-item__status">
+							({userfriend.status})
+						</span>
+					</>
 				): !online ?
 				(
 					<span class="friend-item__status">
@@ -29,6 +40,9 @@ export default function FriendItem(properties) {
 					</span>
 				) : ''
 			}
+			<div class="friend-item__buttons">
+				<ConfirmationButton icon="fas fa-user-times" onConfirm={removeFriend}/>
+			</div>
 			
 		</article>
 	);

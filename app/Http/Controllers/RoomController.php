@@ -13,6 +13,7 @@ class RoomController extends Controller
 {
     // https://beyondco.de/docs/laravel-websockets/basic-usage/starting
 
+    //API
     public function index(Request $request) {
         $user = $request->user();
         return response()->json(RoomResource::collection($user->rooms));
@@ -22,6 +23,25 @@ class RoomController extends Controller
         return response()->json(new RoomResource(Room::findOrFail($room)));
     }
 
+    public function create(Request $request) {
+        $requestData = $request->input();
+        $room = new Room([
+            'user_id' => $request->user()->id,
+            'title' => $requestData['title']
+        ]);
+        $room->save();
+        return response()->json(new RoomResource($room));
+    }
+
+    public function remove(Request $request, $room) {
+        $user = $request->user();
+        if ($room = $user->rooms->find($room)) {
+            $room->delete();
+        }
+    }
+
+
+    // NON API
     public function dashboard(Request $request) {
         $user = Auth::user();
         if (!Auth::check()) {
@@ -32,27 +52,5 @@ class RoomController extends Controller
             'rooms' => $user->rooms,
             'userfriends' => $user->userfriends
         ]);
-    }
-
-    public function create(Request $request) {
-    	$user = Auth::user();
-    	$requestData = $request->input();
-    	$room = new Room(
-    		[
-    			'title' => $requestData['title'],
-    			'user_id' => $user->id
-    		]
-    	);
-    	$room->save();
-    	return redirect()->route('dashboard.index');
-    }
-
-    public function remove(Request $request) {
-        $user = Auth::user();
-        $requestData = $request->input();
-        if ($room = $user->rooms->find($requestData['room'])) {
-            $room->delete();
-        }
-        return redirect()->route('dashboard.index');
     }
 }

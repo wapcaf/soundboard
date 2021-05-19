@@ -1,16 +1,40 @@
 import TextInput from '../UI/TextInput';
 import Button from '../UI/Button';
+import { useState } from 'preact/hooks';
 
 export default function AddRoom(properties) {
+	let button = React.createRef();
+	let input = React.createRef();
+
+	const {onAddRoom} = properties;
+	const [roomname, setRoomname] = useState('');
+
+	const clickSubmit = (e) => {
+		axios.post('/api/rooms', {
+			title: roomname
+		}).then((response) => {
+			onAddRoom(response.data);
+			setRoomname('');
+		}).catch((error) => {
+			console.log(error);
+		});
+	}
 
 	return (
-		<div class="row">
-			<div class="col-md-8">
-				<TextInput icon="fas fa-plus-square" placeholder="Room name"/>
+		<section class="room-items-add">
+			<div class="row">
+				<div class="col-lg-8">
+					<TextInput 
+						icon="fas fa-plus-square" 
+						onChange={setRoomname} 
+						ref={input} 
+						value={roomname}
+						placeholder="Room name"/>
+				</div>
+				<div class="col-lg-4">
+					<Button icon="fas fa-plus-square" onClick={clickSubmit} ref={button} text="Create"/>
+				</div>
 			</div>
-			<div class="col-md-4">
-				<Button icon="fas fa-plus-square" text="Create"/>
-			</div>
-		</div>
+		</section>
 	);
 }

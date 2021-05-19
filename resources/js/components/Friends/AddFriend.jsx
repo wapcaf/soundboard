@@ -1,16 +1,40 @@
 import TextInput from '../UI/TextInput';
 import Button from '../UI/Button';
+import { useState } from 'preact/hooks';
 
 export default function AddFriend(properties) {
+	let button = React.createRef();
+	let input = React.createRef();
+
+	const {onAddFriend} = properties;
+  	const [username, setUsername] = useState('');
+
+	const clickSubmit = (e) => {
+		axios.post('/api/friends', {
+			username: username
+		}).then((response) => {
+			onAddFriend(response.data);
+			setUsername('');
+		}).catch((error) => {
+			console.log(error);
+		});
+	};
 
 	return (
-		<div class="row">
-			<div class="col-md-8">
-				<TextInput icon="fas fa-user-plus" placeholder="Username"/>
+		<section class="friend-items-add">
+			<div class="row">
+				<div class="col-lg-8">
+					<TextInput 
+						icon="fas fa-user-plus" 
+						onChange={setUsername} 
+						ref={input} 
+						value={username}
+						placeholder="Username"/>
+				</div>
+				<div class="col-lg-4">
+					<Button icon="fas fa-plus" onClick={clickSubmit} ref={button} text="Add"/>
+				</div>
 			</div>
-			<div class="col-md-4">
-				<Button icon="fas fa-plus" text="Add"/>
-			</div>
-		</div>
+		</section>
 	);
 }

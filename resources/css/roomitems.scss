@@ -1,6 +1,12 @@
 .room-items {
-	min-height: 200px;
-	margin-bottom: 48px;
+	@media screen and (min-width: $width-sm) {
+		min-height: 200px;
+	}
+	margin-bottom: 32px;
+
+	&-add {
+		margin-bottom: 32px;
+	}
 }
 
 .room-item {
@@ -10,6 +16,7 @@
 	padding: 16px;
 	border: 1px solid var(--body-color);
 	border-radius: 10px;
+	margin-bottom: 16px;
 
 	h3 {
 		margin: 0;
@@ -23,8 +30,12 @@
 		font-size: 24px;
 		color: var(--secondary-color);
 
+		.confirmation-buttons {
+			float: right;
+		}
+
 		a {
-			display: inline-block;
+			float: right;
 			width: 36px;
 			height: 36px;
 			line-height: 36px;
