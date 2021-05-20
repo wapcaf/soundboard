@@ -40,6 +40,7 @@ export default function RoomItem(properties) {
 					<TextInput
 						icon="fas fa-user-plus"
 						placeholder="Invite by username"
+						hasAutoComplete={true}
 						onChange={setUsername}
 						value={username}
 					/>

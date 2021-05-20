@@ -8,7 +8,6 @@ export default function Friends(properties) {
 
 	return (
 		<>
-			<h3>Add a friend</h3>
 			<AddFriend onAddFriend={onAddFriend}/>
 			<hr/><br/>
 			<section class="friend-items">
@@ -16,7 +15,7 @@ export default function Friends(properties) {
 				userfriends.isFetching ? 
 				(<p>Loading friends...</p>) : 
 				_.isEmpty(userfriends.data) ? 
-				(<p>You've got none, you loser. Add some below, quickly!</p>) : 
+				(<p>You've got none, you loser. Add some, quickly!</p>) : 
 				_.map(userfriends.data, (userfriend) => (
 					<FriendItem userfriend={userfriend} onRemoveFriend={onRemoveFriend}/>
 				))

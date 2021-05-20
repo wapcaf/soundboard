@@ -8,14 +8,15 @@ export default function Rooms(properties) {
 
 	return (
 		<>
-			<h3>Create a new room</h3>
 			<AddRoom onAddRoom={onAddRoom}/>
 			<hr/><br/>
 			<section class="room-items">
 			{
-				rooms.isFetching
-				? (<p>Loading rooms...</p>)
-				: _.map(rooms.data, (room) => (
+				rooms.isFetching ? 
+				(<p>Loading rooms...</p>) : 
+				_.isEmpty(rooms.data) ? 
+				(<p>Create one to start your adventure.</p>) : 
+				_.map(rooms.data, (room) => (
 					<RoomItem room={room} friends={friends} onRemoveRoom={onRemoveRoom}/>
 				))
 			}

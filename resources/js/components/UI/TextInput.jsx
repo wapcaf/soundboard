@@ -7,6 +7,7 @@ export default class TextInput extends Component {
 		this.state = {
 			icon: props.icon || '',
 			placeholder: props.placeholder || '',
+			hasAutoComplete: props.hasAutoComplete || false,
 			focus: false
 		};
 
@@ -28,8 +29,10 @@ export default class TextInput extends Component {
 
 	render() {
 		let inputClass = 'input input-text';
-		if (this.props.value)
+		if (this.props.value) {
 			this.props.value.length > 0 ? inputClass += ' input-text--filled' : null;
+			this.state.hasAutoComplete && this.props.value.length > 0 ? inputClass += ' input-text--autocompleting' : null;
+		}
 		this.state.focus ? inputClass += ' input-text--focus' : null;
 		return (
 			<label class={inputClass} onclick={this.focusInput}>

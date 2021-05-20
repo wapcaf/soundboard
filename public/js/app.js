@@ -2255,16 +2255,14 @@ function Friends(properties) {
       onAddFriend = properties.onAddFriend,
       onRemoveFriend = properties.onRemoveFriend;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-      children: "Add a friend"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddFriend__WEBPACK_IMPORTED_MODULE_2__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddFriend__WEBPACK_IMPORTED_MODULE_2__.default, {
       onAddFriend: onAddFriend
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
       "class": "friend-items",
       children: userfriends.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
         children: "Loading friends..."
       }) : _.isEmpty(userfriends.data) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
-        children: "You've got none, you loser. Add some below, quickly!"
+        children: "You've got none, you loser. Add some, quickly!"
       }) : _.map(userfriends.data, function (userfriend) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_FriendItem__WEBPACK_IMPORTED_MODULE_1__.default, {
           userfriend: userfriend,
@@ -2448,6 +2446,7 @@ function RoomItem(properties) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UI_TextInput__WEBPACK_IMPORTED_MODULE_2__.default, {
           icon: "fas fa-user-plus",
           placeholder: "Invite by username",
+          hasAutoComplete: true,
           onChange: setUsername,
           value: username
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_UI_AutoComplete__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -2496,14 +2495,14 @@ function Rooms(properties) {
       onRemoveRoom = properties.onRemoveRoom,
       friends = properties.friends;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h3", {
-      children: "Create a new room"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddRoom__WEBPACK_IMPORTED_MODULE_2__.default, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_AddRoom__WEBPACK_IMPORTED_MODULE_2__.default, {
       onAddRoom: onAddRoom
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("br", {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("section", {
       "class": "room-items",
       children: rooms.isFetching ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
         children: "Loading rooms..."
+      }) : _.isEmpty(rooms.data) ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("p", {
+        children: "Create one to start your adventure."
       }) : _.map(rooms.data, function (room) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_RoomItem__WEBPACK_IMPORTED_MODULE_1__.default, {
           room: room,
@@ -2530,6 +2529,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/preact/compat/jsx-runtime.mjs");
 
+
 function AutoComplete(props) {
   var autoCompleting = props.autoCompleting,
       search = props.search,
@@ -2540,15 +2540,21 @@ function AutoComplete(props) {
     return _.includes(item.friend.username, search);
   });
 
+  var className = search.length == 0 ? 'auto-complete auto-complete--empty' : 'auto-complete';
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-    "class": "auto-complete",
-    children: search.length > 0 ? results.length > 0 ? _.map(results, function (result) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-        children: result.friend.username
-      });
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
-      children: "No matching friends"
-    }) : null
+    "class": "auto-complete-wrapper",
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      "class": className,
+      children: search.length > 0 ? results.length > 0 ? _.map(results, function (result) {
+        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("button", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("i", {
+            "class": "fas fa-plus"
+          }), result.friend.username]
+        });
+      }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", {
+        children: "No matching friends"
+      }) : null
+    })
   });
 }
 
@@ -2929,6 +2935,7 @@ var TextInput = /*#__PURE__*/function (_Component) {
     _this.state = {
       icon: props.icon || '',
       placeholder: props.placeholder || '',
+      hasAutoComplete: props.hasAutoComplete || false,
       focus: false
     };
     _this.textInput = React.createRef();
@@ -2939,7 +2946,12 @@ var TextInput = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var inputClass = 'input input-text';
-      if (this.props.value) this.props.value.length > 0 ? inputClass += ' input-text--filled' : null;
+
+      if (this.props.value) {
+        this.props.value.length > 0 ? inputClass += ' input-text--filled' : null;
+        this.state.hasAutoComplete && this.props.value.length > 0 ? inputClass += ' input-text--autocompleting' : null;
+      }
+
       this.state.focus ? inputClass += ' input-text--focus' : null;
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("label", {
         "class": inputClass,
